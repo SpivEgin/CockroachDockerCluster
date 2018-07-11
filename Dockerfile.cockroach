@@ -12,7 +12,9 @@ ADD ./docker/bash/cockroach_entry.sh /opt/config/entry.sh
 ADD https://raw.githubusercontent.com/adbegon/pub/master/AdfreeZoneSSL.crt /usr/local/share/ca-certificates/
 
 RUN update-ca-certificates --verbose &&\
+    apt-get update && apt-get install -y unzip &&\
     cd /opt/cockroach && unzip cockroach.zip && rm cockroach.zip &&\
+    apt-get remove unzip &&\
     mv /opt/cockroach/cockroach.20180611 /opt/cockroach/cockroach &&\
     chmod +x /opt/cockroach/cockroach &&\
     ln -s /opt/cockroach/cockroach /usr/local/bin/cockroach &&\

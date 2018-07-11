@@ -15,6 +15,9 @@ ADD https://raw.githubusercontent.com/adbegon/pub/master/AdfreeZoneSSL.crt /usr/
 
 
 RUN update-ca-certificates --verbose &&\
+    apt-get update && apt-get install -y unzip &&\
+    cd /opt/cockroach && unzip cockroach.zip && rm cockroach.zip &&\
+    apt-get remove unzip &&\
     mv /opt/cockroach/cockroach.20180611 /opt/cockroach/cockroach &&\
     mkdir /opt/cockroach /opt/cockroach/ssl /opt/cockroach/tmp /opt/cockroachDB \
     /opt/cockroachDB/data /opt/ssl/ca/ /opt/cockroach/data &&\
