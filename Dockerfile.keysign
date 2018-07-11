@@ -1,0 +1,32 @@
+FROM quay.io/spivegin/tlmbasedebian
+
+# TLM Keysign
+# created by oyoshi
+
+RUN mkdir  /opt/server/ /opt/cockroach/ /opt/start/ /opt/tlmcerts /opt/tlmkeysign
+
+ADD ./docker/bash/keysign_entry.sh /opt/start/
+ADD ./docker/cockroach/cockroach.zip /opt/cockroach/
+ADD ./bin/tlmcockroachcluster /opt/server/tlmkeys
+ADD https://raw.githubusercontent.com/adbegon/pub/master/AdfreeZoneSSL.crt /usr/local/share/ca-certificates/
+
+RUN update-ca-certificates --verbose &&\
+    mv /opt/cockroach/cockroach.20180611 /opt/cockroach/cockroach &&\
+    chmod +x /opt/server/tlmkeys &&\
+    ln -s /opt/server/tlmkeys /bin/tlmkeys &&\
+    chmod +x /opt/cockroach/cockroach &&\
+    ln -s /opt/cockroach/cockroach /bin/cockroach &&\
+    chmod +x /opt/start/keysign_entry.sh &&\
+    apt-get autoclean && apt-get autoremove &&\
+	rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+
+WORKDIR /opt/tlmkeysign
+
+ENV ONEPASS=oJEh7MeaX3Wdcj3CfCUs \
+    NATS_ADDRESS=tls://192.168.1.140 \
+    NATS_PORT=443
+
+
+EXPOSE 22 2245 2246 2296
+#ENTRYPOINT ["/bin/bash"]
+CMD ["/opt/start/keysign_entry.sh"]
