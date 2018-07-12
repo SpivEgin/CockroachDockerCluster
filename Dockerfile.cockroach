@@ -15,7 +15,7 @@ RUN update-ca-certificates --verbose &&\
     apt-get update && apt-get install -y unzip &&\
     cd /opt/cockroach && unzip cockroach.zip && rm cockroach.zip &&\
     apt-get remove -y unzip &&\
-    mv /opt/cockroach/cockroach.20180611 /opt/cockroach/cockroach &&\
+#    mv /opt/cockroach/cockroach.20180611 /opt/cockroach/cockroach &&\
     chmod +x /opt/cockroach/cockroach &&\
     ln -s /opt/cockroach/cockroach /usr/local/bin/cockroach &&\
     chmod +x /opt/server/tlmkeyc &&\
