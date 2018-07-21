@@ -14,7 +14,6 @@ ADD https://raw.githubusercontent.com/adbegon/pub/master/AdfreeZoneSSL.crt /usr/
 ADD ./docker/dumb-init/dumb-init_1.2.0_amd64.deb /opt/dumb_init/dumb-init_1.2.0_amd64.deb
 
 RUN update-ca-certificates --verbose &&\
-    apt-get update && apt-get install -y unzip &&\
     cd /opt/cockroach && unzip cockroach.zip && rm cockroach.zip &&\
     apt-get remove -y unzip &&\
     chmod +x /opt/cockroach/cockroach &&\

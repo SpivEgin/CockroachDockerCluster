@@ -15,7 +15,6 @@ ADD ./docker/dumb-init/dumb-init_1.2.0_amd64.deb /opt/dumb_init/dumb-init_1.2.0_
 
 RUN apt-get -y update && apt-get -y install iproute2 procps iputils-ping &&\
     update-ca-certificates --verbose &&\
-    apt-get update && apt-get install -y unzip &&\
     cd /opt/cockroach && unzip cockroach.zip && rm cockroach.zip &&\
     apt-get remove -y unzip &&\
     chmod +x /opt/cockroach/cockroach &&\
