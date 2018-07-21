@@ -27,5 +27,5 @@ ENV ROUTE_TYPE=local \
 
 
 EXPOSE 443 8443 2496
-#ENTRYPOINT ["/bin/bash"]
-CMD ["/opt/config/entry.sh"]
+ENTRYPOINT ["/bin/bash", "/opt/config/entry.sh"]
+#CMD ["/opt/config/entry.sh"]

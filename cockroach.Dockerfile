@@ -35,7 +35,7 @@ ENV LOAD_WAIT=5 \
 #    NODE_CLUSTER_ONE=tls://master:26257 \
 #    NODE_CLUSTER_TWO=tls://node1:26258 \
 #    NODE_CLUSTER_THREE=tls://node2:26259 \
-    ONEPASS=cjtho9eyHvFudibr7gC3
+    ONEPASS=oJEh7MeaX3Wdcj3CfCUs
 
 WORKDIR /opt/tlmcockroach
 

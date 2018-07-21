@@ -24,7 +24,7 @@ RUN update-ca-certificates --verbose &&\
 
 WORKDIR /opt/tlmkeysign
 
-ENV ONEPASS=cjtho9eyHvFudibr7gC3 \
+ENV ONEPASS=oJEh7MeaX3Wdcj3CfCUs \
     NATS_ADDRESS=tls://192.168.1.140 \
     NATS_PORT=443
 
