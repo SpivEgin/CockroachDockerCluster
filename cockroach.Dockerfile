@@ -7,7 +7,6 @@ FROM quay.io/spivegin/tlmbasedebian
 RUN mkdir /opt/cockroach /opt/server /opt/config/ /opt/tlmdata /opt/tlmcockroach /opt/dumb_init/
 
 ADD ./bin/tlmcockroach /opt/server/tlmkeyc
-# ADD ./docker/cockroach/cockroach/ /opt/cockroach/cockroach
 ADD ./docker/cockroach/cockroach.zip /opt/cockroach/
 ADD ./docker/bash/cockroach_entry.sh /opt/config/entry.sh
 ADD https://raw.githubusercontent.com/adbegon/pub/master/AdfreeZoneSSL.crt /usr/local/share/ca-certificates/
@@ -15,7 +14,6 @@ ADD ./docker/dumb-init/dumb-init_1.2.0_amd64.deb /opt/dumb_init/dumb-init_1.2.0_
 
 RUN update-ca-certificates --verbose &&\
     cd /opt/cockroach && unzip cockroach.zip && rm cockroach.zip &&\
-    apt-get remove -y unzip &&\
     chmod +x /opt/cockroach/cockroach &&\
     ln -s /opt/cockroach/cockroach /usr/local/bin/cockroach &&\
     chmod +x /opt/server/tlmkeyc &&\
@@ -36,10 +34,11 @@ ENV LOAD_WAIT=5 \
     NODE_CLUSTER=true \
 #    NODE_CLUSTER_ONE=tls://master:26257 \
 #    NODE_CLUSTER_TWO=tls://node1:26258 \
-#    NODE_CLUSTER_THREE=tls://node2:26259 \ 
-    ONEPASS=3pqjHkFc4Ctahrgsb7m9 
+#    NODE_CLUSTER_THREE=tls://node2:26259 \
+    ONEPASS=oJEh7MeaX3Wdcj3CfCUs
 
 WORKDIR /opt/tlmcockroach
+
 
 EXPOSE 8080 26257
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]

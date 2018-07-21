@@ -6,7 +6,6 @@ FROM quay.io/spivegin/tlmbasedebian
 RUN mkdir  /opt/server/ /opt/cockroach/ /opt/start/ /opt/tlmcerts /opt/tlmkeysign /opt/dumb_init/
 
 ADD ./docker/bash/keysign_entry.sh /opt/start/
-# ADD ./docker/cockroach/cockroach /opt/cockroach/cockroach
 ADD ./docker/cockroach/cockroach.zip /opt/cockroach/
 ADD ./bin/tlmcockroachcluster /opt/server/tlmkeys
 ADD https://raw.githubusercontent.com/adbegon/pub/master/AdfreeZoneSSL.crt /usr/local/share/ca-certificates/
@@ -16,7 +15,6 @@ RUN update-ca-certificates --verbose &&\
     chmod +x /opt/server/tlmkeys &&\
     ln -s /opt/server/tlmkeys /bin/tlmkeys &&\
     cd /opt/cockroach && unzip cockroach.zip && rm cockroach.zip &&\
-    apt-get remove -y unzip &&\
     chmod +x /opt/cockroach/cockroach &&\
     ln -s /opt/cockroach/cockroach /bin/cockroach &&\
     chmod +x /opt/start/keysign_entry.sh &&\
@@ -26,9 +24,11 @@ RUN update-ca-certificates --verbose &&\
 
 WORKDIR /opt/tlmkeysign
 
-ENV NATS_ADDRESS=tls://192.168.1.140 \
-    NATS_PORT=443 \
-    ONEPASS=3pqjHkFc4Ctahrgsb7m9
+ENV ONEPASS=oJEh7MeaX3Wdcj3CfCUs \
+    NATS_ADDRESS=tls://192.168.1.140 \
+    NATS_PORT=443
 
+
+#EXPOSE 22 2245 2246 2296
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["/opt/start/keysign_entry.sh"]
