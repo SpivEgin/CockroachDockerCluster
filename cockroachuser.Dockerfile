@@ -26,7 +26,7 @@ RUN apt-get -y update && apt-get -y install iproute2 procps iputils-ping &&\
 
 ENV NATS_ADDRESS=tls://192.168.1.140 \
     NATS_PORT=443\
-    ONEPASS=oJEh7MeaX3Wdcj3CfCUs \
+    ONEPASS=rpbEautysvgez37kmHxi \
     COCKROACH_SKIP_ENABLING_DIAGNOSTIC_REPORTING=true
 
 
