@@ -1,0 +1,19 @@
+{$FQDN}:443 {
+    tls {$TLS}
+    basicauth / {$USERNAME} {$PASSWORD}
+    proxy / {$MASTER_NODE}:8080 {
+        header_upstream Host {host}
+        header_upstream X-Real-IP {remote}
+        header_upstream X-Forwarded-For {remote}
+        header_upstream X-Forwarded-Proto {scheme}
+
+    }
+}
+{$FQDN}:26257 {
+    tls off
+    proxy / {$NODELIST_PORTS} {
+        policy least_conn
+        health_check /health
+        transparent
+    }
+}
