@@ -1,7 +1,17 @@
-{$FQDN}:443 {
+{$FQDN}:8080 {
     tls {$TLS}
     basicauth / {$USERNAME} {$PASSWORD}
     proxy / {$MASTER_NODE}:8080 {
+        header_upstream Host {host}
+        header_upstream X-Real-IP {remote}
+        header_upstream X-Forwarded-For {remote}
+        header_upstream X-Forwarded-Proto {scheme}
+
+    }
+}
+tls://{$FQDN}:443 {
+    tls off
+    proxy / tls://{$NATS_ADDRESS}:443 {
         header_upstream Host {host}
         header_upstream X-Real-IP {remote}
         header_upstream X-Forwarded-For {remote}

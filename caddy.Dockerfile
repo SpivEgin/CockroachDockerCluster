@@ -18,7 +18,7 @@ RUN update-ca-certificates --verbose &&\
     ln /opt/caddy/caddy /bin/caddy &&\
     chmod +x /opt/config/entry.sh &&\
     apt-get autoclean && apt-get autoremove &&\
-	rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 WORKDIR /opt/tlmncaddy
 
@@ -28,7 +28,8 @@ ENV FQDN=0.0.0.0 \
     MASTER_NODE=master \
     NODELIST_PORT="master:26257 node1:26258 noode2:26259" \
     TLS=off \
-    TESTING=true
+    TESTING=true \
+    NATS_ADDRESS="tls://natsd"
 
 EXPOSE 80 443 26257
 ENTRYPOINT ["/opt/config/entry.sh"]
