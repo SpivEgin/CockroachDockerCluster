@@ -32,5 +32,5 @@ ENV FQDN=0.0.0.0 \
     NATS_ADDRESS="tls://natsd"
 
 EXPOSE 80 443 26257
-#ENTRYPOINT ["/opt/config/entry.sh"]
-CMD ["/opt/config/entry.sh"]
+ENTRYPOINT ["/opt/config/entry.sh"]
+#CMD ["/opt/config/entry.sh"]
