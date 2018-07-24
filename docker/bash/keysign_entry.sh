@@ -2,7 +2,7 @@
 
 
 tlmkeys init --keysign
-# sleep 10
+sleep 3
 tlmkeys nodecluster &
 tlmkeys users &
 tlmkeys keysign
