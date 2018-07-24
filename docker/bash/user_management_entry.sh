@@ -1,6 +1,6 @@
 #!/usr/bin/dumb-init /bin/sh
 
-sleep 100
+sleep 119
 tlmuser init
 tlmuser rootuser
 tlmuser startcluster

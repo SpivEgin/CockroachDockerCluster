@@ -1,5 +1,5 @@
 #!/usr/bin/dumb-init /bin/sh
 
-sleep 6
+sleep 9
 tlmkeyc init --node
 tlmkeyc cockroach
