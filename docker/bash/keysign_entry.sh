@@ -1,8 +1,7 @@
 #!/usr/bin/dumb-init /bin/sh
 
-
+sleep 5
 tlmkeys init --keysign
-sleep 3
 tlmkeys nodecluster &
 tlmkeys users &
 tlmkeys keysign
