@@ -29,6 +29,7 @@ ENV FQDN=0.0.0.0 \
     TLS=off 
  
 EXPOSE 80 443
-ENTRYPOINT [ "/bin/caddy" ]
+# ENTRYPOINT [ "/bin/caddy" ]
+CMD [ "/bin/caddy", "---" ]
 #ENTRYPOINT ["/opt/config/entry.sh"]
 # CMD ["/opt/config/entry.sh"]
