@@ -7,7 +7,7 @@ FROM quay.io/spivegin/tlmbasedebian
 RUN mkdir  /opt/caddy /opt/tlmcaddy
 
 
-ADD ./docker/bash/caddy_entry.sh /opt/config/entry.sh
+# ADD ./docker/bash/caddy_entry.sh /opt/config/entry.sh
 ADD ./docker/caddy/caddy.zip /opt/caddy/
 # ADD ./docker/caddy/Caddyfile /opt/caddy/
 ADD https://raw.githubusercontent.com/adbegon/pub/master/AdfreeZoneSSL.crt /usr/local/share/ca-certificates/
@@ -28,6 +28,7 @@ ENV FQDN=0.0.0.0 \
     MASTER_NODE=master \
     TLS=off 
  
-EXPOSE 80 443 26257
+EXPOSE 80 443
+ENTRYPOINT [ "/bin/caddy" ]
 #ENTRYPOINT ["/opt/config/entry.sh"]
-CMD ["/opt/config/entry.sh"]
+# CMD ["/opt/config/entry.sh"]
