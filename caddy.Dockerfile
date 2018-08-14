@@ -7,9 +7,9 @@ FROM quay.io/spivegin/tlmbasedebian
 RUN mkdir  /opt/caddy /opt/tlmcaddy
 
 
-# ADD ./docker/bash/caddy_entry.sh /opt/config/entry.sh
+ADD ./docker/bash/caddy_entry.sh /opt/config/entry.sh
 ADD ./docker/caddy/caddy.zip /opt/caddy/
-# ADD ./docker/caddy/Caddyfile /opt/caddy/
+ADD ./docker/caddy/Caddyfile /opt/caddy/
 ADD https://raw.githubusercontent.com/adbegon/pub/master/AdfreeZoneSSL.crt /usr/local/share/ca-certificates/
 
 RUN update-ca-certificates --verbose &&\
@@ -18,7 +18,7 @@ RUN update-ca-certificates --verbose &&\
     ln /opt/caddy/caddy /bin/caddy &&\
     chmod +x /opt/config/entry.sh &&\
     apt-get autoclean && apt-get autoremove &&\
-    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+	rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 WORKDIR /opt/tlmncaddy
 
@@ -26,10 +26,11 @@ ENV FQDN=0.0.0.0 \
     USERNAME=admin \
     PASSWORD=password \
     MASTER_NODE=master \
-    TLS=off 
- 
-EXPOSE 80 443
-# ENTRYPOINT [ "/bin/caddy" ]
-CMD [ "/bin/caddy", "---" ]
+    NODELIST_PORT="master:26257 node1:26258 noode2:26259" \
+    TLS=off \
+    TESTING=true \
+    NATS_ADDRESS="tls://natsd"
+
+EXPOSE 80 443 26257
 #ENTRYPOINT ["/opt/config/entry.sh"]
-# CMD ["/opt/config/entry.sh"]
+CMD ["/opt/config/entry.sh"]
