@@ -23,5 +23,7 @@ tls://{$FQDN}:443 {
     tls off
     proxy / {$NODELIST_PORTS} {
         policy least_conn
+        health_check /health
+        transparent
     }
 }
