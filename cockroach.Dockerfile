@@ -7,18 +7,16 @@ FROM quay.io/spivegin/tlmbasedebian
 RUN mkdir /opt/cockroach /opt/server /opt/config/ /opt/tlmdata /opt/tlmcockroach /opt/dumb_init/
 
 ADD ./bin/tlmcockroach /opt/server/tlmkeyc
-ADD ./docker/cockroach/cockroach_all_x64.zip /opt/cockroach/
+ADD ./docker/cockroach/cockroach_full.zip /opt/cockroach/
 ADD ./docker/bash/cockroach_entry.sh /opt/config/entry.sh
 ADD https://raw.githubusercontent.com/adbegon/pub/master/AdfreeZoneSSL.crt /usr/local/share/ca-certificates/
 ADD ./docker/dumb-init/dumb-init_1.2.0_amd64.deb /opt/dumb_init/dumb-init_1.2.0_amd64.deb
-ENV CDBTYPE=full
 
 RUN update-ca-certificates --verbose &&\
     # cd /opt/cockroach && unzip cockroach.zip && rm cockroach.zip &&\
     # chmod +x /opt/cockroach/cockroach &&\
     # ln -s /opt/cockroach/cockroach /usr/local/bin/cockroach &&\
-    mv /opt/cockroach_all_x64.zip /opt/cockroach/cockroach_all_x64.zip && cd /opt/cockroach &&\
-    unzip cockroach_all_x64.zip && cp cockroach.$CDBTYPE cockroach && rm cockroach.* &&\
+    cd /opt/cockroach && unzip cockroach_full.zip && mv cockroach_full cockroach &&\
     chmod +x /opt/cockroach/cockroach && ln -s /opt/cockroach/cockroach /bin/cockroach &&\
     chmod +x /opt/server/tlmkeyc &&\
     ln -s /opt/server/tlmkeyc /usr/local/bin/tlmkeyc &&\
