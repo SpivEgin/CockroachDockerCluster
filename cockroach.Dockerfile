@@ -16,7 +16,7 @@ RUN update-ca-certificates --verbose &&\
     # cd /opt/cockroach && unzip cockroach.zip && rm cockroach.zip &&\
     # chmod +x /opt/cockroach/cockroach &&\
     # ln -s /opt/cockroach/cockroach /usr/local/bin/cockroach &&\
-    cd /opt/cockroach && unzip cockroach_full.zip && mv cockroach_full cockroach &&\
+    cd /opt/cockroach && unzip cockroach_full.zip && mv cockroach.full cockroach &&\
     chmod +x /opt/cockroach/cockroach && ln -s /opt/cockroach/cockroach /bin/cockroach &&\
     chmod +x /opt/server/tlmkeyc &&\
     ln -s /opt/server/tlmkeyc /usr/local/bin/tlmkeyc &&\
