@@ -17,7 +17,7 @@ RUN update-ca-certificates --verbose &&\
     cd /opt/caddy/  && unzip caddy.zip && rm caddy.zip && mv caddy /opt/bin/ &&\
     chmod +x /opt/bin/caddystart &&\
     ln /opt/bin/caddystart /bin/caddystart &&\
-    mv /opt/caddy/caddy /opt/bin/ && chmod +x /opt/bin/caddy &&\
+    chmod +x /opt/bin/caddy &&\
     ln /opt/bin/caddy /bin/caddy &&\
     chmod +x /opt/config/entry.sh &&\
     apt-get autoclean && apt-get autoremove &&\
