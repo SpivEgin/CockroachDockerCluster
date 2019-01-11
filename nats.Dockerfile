@@ -6,9 +6,9 @@ FROM quay.io/spivegin/tlmbasedebian
 RUN mkdir  /opt/server /opt/nats /opt/tlmnats /opt/bin
 
 
-ADD ./bin/tlmcockroachcluster /opt/bin/tlmnats
-ADD ./docker/bash/nats_server_entry.sh /opt/config/entry.sh
-ADD ./docker/gnats/gnatsd /opt/bin/
+ADD bin/tlmcockroachcluster /opt/bin/tlmnats
+ADD docker/bash/nats_server_entry.sh /opt/config/entry.sh
+ADD docker/gnats/gnatsd /opt/bin/
 ADD https://raw.githubusercontent.com/adbegon/pub/master/AdfreeZoneSSL.crt /usr/local/share/ca-certificates/
 
 RUN update-ca-certificates --verbose &&\

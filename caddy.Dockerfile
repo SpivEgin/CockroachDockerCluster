@@ -7,10 +7,10 @@ FROM quay.io/spivegin/tlmbasedebian
 RUN mkdir  /opt/caddy /opt/tlmcaddy /opt/bin
 
 
-ADD ./docker/bash/caddy_entry.sh /opt/config/entry.sh
-ADD ./docker/caddy/caddy.zip /opt/caddy/
-ADD ./docker/caddy/Caddyfile /opt/caddy/
-ADD ./bin/caddystart /opt/bin/caddystart
+ADD docker/bash/caddy_entry.sh /opt/config/entry.sh
+ADD docker/caddy/caddy.zip /opt/caddy/
+ADD docker/caddy/Caddyfile /opt/caddy/
+ADD bin/caddystart /opt/bin/caddystart
 ADD https://raw.githubusercontent.com/adbegon/pub/master/AdfreeZoneSSL.crt /usr/local/share/ca-certificates/
 
 RUN update-ca-certificates --verbose &&\

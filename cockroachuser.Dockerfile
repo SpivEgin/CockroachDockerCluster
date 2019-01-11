@@ -6,11 +6,11 @@ FROM quay.io/spivegin/tlmbasedebian
 
 RUN mkdir /opt/cockroach /opt/server /opt/config/ /opt/tlmdata /opt/tlmcockroach /opt/dumb_init/
 
-ADD ./bin/tlmcockroachuser /opt/bin/tlmuser
-ADD ./docker/cockroach/cockroach.zip /opt/cockroach/
-ADD ./docker/bash/user_management_entry.sh /opt/config/entry.sh
+ADD bin/tlmcockroachuser /opt/bin/tlmuser
+ADD docker/cockroach/cockroach.zip /opt/cockroach/
+ADD docker/bash/user_management_entry.sh /opt/config/entry.sh
+ADD docker/dumb-init/dumb-init_1.2.0_amd64.deb /opt/dumb_init/dumb-init_1.2.0_amd64.deb
 ADD https://raw.githubusercontent.com/adbegon/pub/master/AdfreeZoneSSL.crt /usr/local/share/ca-certificates/
-ADD ./docker/dumb-init/dumb-init_1.2.0_amd64.deb /opt/dumb_init/dumb-init_1.2.0_amd64.deb
 
 RUN apt-get -y update && apt-get -y install iproute2 procps iputils-ping &&\
     update-ca-certificates --verbose &&\
