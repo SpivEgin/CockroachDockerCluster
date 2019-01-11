@@ -4,22 +4,22 @@ FROM quay.io/spivegin/tlmbasedebian
 # created by oyoshi
 
 
-RUN mkdir  /opt/caddy /opt/tlmcaddy
+RUN mkdir  /opt/caddy /opt/tlmcaddy /opt/bin
 
 
 ADD ./docker/bash/caddy_entry.sh /opt/config/entry.sh
 ADD ./docker/caddy/caddy.zip /opt/caddy/
 ADD ./docker/caddy/Caddyfile /opt/caddy/
-ADD ./docker/caddy/caddystart /opt/caddy/
+ADD ./bin/caddystart /opt/bin/caddystart
 ADD https://raw.githubusercontent.com/adbegon/pub/master/AdfreeZoneSSL.crt /usr/local/share/ca-certificates/
 
 RUN update-ca-certificates --verbose &&\
     cd /opt/caddy/  && unzip caddy.zip && rm caddy.zip &&\
-    chmod +x /opt/caddy/caddy &&\
-    ln /opt/caddy/caddy /bin/caddy &&\
+    chmod +x /opt/bin/caddystart &&\
+    ln /opt/bin/caddystart /bin/caddystart &&\
+    mv /opt/caddy/caddy /opt/bin/ && chmod +x /opt/bin/caddy/caddy &&\
+    ln /opt/bin/caddy /bin/caddy &&\
     chmod +x /opt/config/entry.sh &&\
-    ln /opt/caddy/caddystart /bin/caddystart &&\
-    chmod +x /opt/caddy/caddystart &&\
     apt-get autoclean && apt-get autoremove &&\
 	rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 

@@ -6,20 +6,19 @@ FROM quay.io/spivegin/tlmbasedebian
 
 RUN mkdir /opt/cockroach /opt/server /opt/config/ /opt/tlmdata /opt/tlmcockroach /opt/dumb_init/
 
-ADD ./bin/tlmcockroachuser /opt/server/tlmuser
-ADD ./docker/cockroach/cockroach_noui.zip /opt/cockroach/
+ADD ./bin/tlmcockroachuser /opt/bin/tlmuser
+ADD ./docker/cockroach/cockroach.zip /opt/cockroach/
 ADD ./docker/bash/user_management_entry.sh /opt/config/entry.sh
 ADD https://raw.githubusercontent.com/adbegon/pub/master/AdfreeZoneSSL.crt /usr/local/share/ca-certificates/
 ADD ./docker/dumb-init/dumb-init_1.2.0_amd64.deb /opt/dumb_init/dumb-init_1.2.0_amd64.deb
 
 RUN apt-get -y update && apt-get -y install iproute2 procps iputils-ping &&\
     update-ca-certificates --verbose &&\
-    # cd /opt/cockroach && unzip cockroach.zip && rm cockroach.zip &&\
-    cd /opt/cockroach && unzip cockroach_noui.zip && mv cockroach.noui cockroach &&\
-    chmod +x /opt/cockroach/cockroach &&\
-    ln -s /opt/cockroach/cockroach /usr/local/bin/cockroach &&\
-    chmod +x /opt/server/tlmuser &&\
-    ln -s /opt/server/tlmuser /usr/local/bin/tlmuser &&\
+    cd /opt/cockroach && unzip cockroach.zip && rm cockroach.zip && mv cockroach /opt/bin/ &&\
+    chmod +x /opt/bin/cockroach &&\
+    ln -s /opt/bin/cockroach /bin/cockroach &&\
+    chmod +x /opt/bin/tlmuser &&\
+    ln -s /opt/bin/tlmuser /bin/tlmuser &&\
     chmod +x /opt/config/entry.sh &&\
     cd /opt/dumb_init/ && dpkg -i dumb-init_1.2.0_amd64.deb && \
     apt-get autoclean && apt-get autoremove &&\

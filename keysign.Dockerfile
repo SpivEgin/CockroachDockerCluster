@@ -3,20 +3,20 @@ FROM quay.io/spivegin/tlmbasedebian
 # TLM Keysign
 # created by oyoshi
 
-RUN mkdir  /opt/server/ /opt/cockroach/ /opt/start/ /opt/tlmcerts /opt/tlmkeysign /opt/dumb_init/
+RUN mkdir  /opt/server/ /opt/cockroach/ /opt/start/ /opt/tlmcerts /opt/tlmkeysign /opt/dumb_init/ /opt/bin
 
 ADD ./docker/bash/keysign_entry.sh /opt/start/
-ADD ./docker/cockroach/cockroach_noui.zip /opt/cockroach/
-ADD ./bin/tlmcockroachcluster /opt/server/tlmkeys
+ADD ./docker/cockroach/cockroach.zip /opt/cockroach/
+ADD ./bin/tlmcockroachcluster /opt/bin/tlmkeys
 ADD https://raw.githubusercontent.com/adbegon/pub/master/AdfreeZoneSSL.crt /usr/local/share/ca-certificates/
 ADD ./docker/dumb-init/dumb-init_1.2.0_amd64.deb /opt/dumb_init/dumb-init_1.2.0_amd64.deb
 
 RUN update-ca-certificates --verbose &&\
-    chmod +x /opt/server/tlmkeys &&\
-    ln -s /opt/server/tlmkeys /bin/tlmkeys &&\
-    cd /opt/cockroach && unzip cockroach_noui.zip && mv cockroach.noui cockroach &&\
-    chmod +x /opt/cockroach/cockroach &&\
-    ln -s /opt/cockroach/cockroach /bin/cockroach &&\
+    chmod +x /opt/bin/tlmkeys &&\
+    ln -s /opt/bin/tlmkeys /bin/tlmkeys &&\
+    cd /opt/cockroach && unzip cockroach.zip && rm cockroach.zip && mv cockroach /opt/bin/ &&\
+    chmod +x /opt/bin/cockroach &&\
+    ln -s /opt/bin/cockroach /bin/cockroach &&\
     chmod +x /opt/start/keysign_entry.sh &&\
     cd /opt/dumb_init/ && dpkg -i dumb-init_1.2.0_amd64.deb && \
     apt-get autoclean && apt-get autoremove &&\
