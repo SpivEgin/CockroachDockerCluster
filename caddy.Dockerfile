@@ -14,14 +14,14 @@ ADD bin/caddystart /opt/bin/caddystart
 ADD https://raw.githubusercontent.com/adbegon/pub/master/AdfreeZoneSSL.crt /usr/local/share/ca-certificates/
 
 RUN update-ca-certificates --verbose &&\
-    cd /opt/caddy/  && unzip caddy.zip && rm caddy.zip &&\
+    cd /opt/caddy/  && unzip caddy.zip && rm caddy.zip && mv caddy /opt/bin/ &&\
     chmod +x /opt/bin/caddystart &&\
     ln /opt/bin/caddystart /bin/caddystart &&\
-    mv /opt/caddy/caddy /opt/bin/ && chmod +x /opt/bin/caddy/caddy &&\
+    mv /opt/caddy/caddy /opt/bin/ && chmod +x /opt/bin/caddy &&\
     ln /opt/bin/caddy /bin/caddy &&\
     chmod +x /opt/config/entry.sh &&\
     apt-get autoclean && apt-get autoremove &&\
-	rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 WORKDIR /opt/tlmncaddy
 
