@@ -21,7 +21,7 @@ RUN update-ca-certificates --verbose &&\
     ln /opt/bin/caddy /bin/caddy &&\
     chmod +x /opt/config/entry.sh &&\
     apt-get autoclean && apt-get autoremove &&\
-    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+	rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 WORKDIR /opt/tlmncaddy
 
