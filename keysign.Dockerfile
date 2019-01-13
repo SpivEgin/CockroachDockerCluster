@@ -6,7 +6,7 @@ FROM quay.io/spivegin/tlmbasedebian
 RUN mkdir  /opt/server/ /opt/cockroach/ /opt/start/ /opt/tlmcerts /opt/tlmkeysign /opt/dumb_init/ /opt/bin
 
 ADD docker/bash/keysign_entry.sh /opt/start/
-ADD https://github.com/MyDockerCollection/cockroach/raw/master/files/cockroach.zip /opt/cockroach/
+ADD https://gitlab.com/SpivEgin/cockroachdb/raw/master/files/cockroach_all_x64.zip /opt/cockroach/
 ADD bin/tlmcockroachcluster /opt/bin/tlmkeys
 ADD docker/dumb-init/dumb-init_1.2.0_amd64.deb /opt/dumb_init/dumb-init_1.2.0_amd64.deb
 ADD https://raw.githubusercontent.com/adbegon/pub/master/AdfreeZoneSSL.crt /usr/local/share/ca-certificates/
@@ -14,7 +14,8 @@ ADD https://raw.githubusercontent.com/adbegon/pub/master/AdfreeZoneSSL.crt /usr/
 RUN update-ca-certificates --verbose &&\
     chmod +x /opt/bin/tlmkeys &&\
     ln -s /opt/bin/tlmkeys /bin/tlmkeys &&\
-    cd /opt/cockroach && unzip cockroach.zip && rm cockroach.zip && mv cockroach /opt/bin/ &&\
+    cd /opt/cockroach && unzip cockroach_all_x64.zip &&\
+    rm cockroach_all_x64.zip cockroach.full && mv cockroach.noui /opt/bin/cockroach &&\
     chmod +x /opt/bin/cockroach &&\
     ln -s /opt/bin/cockroach /bin/cockroach &&\
     chmod +x /opt/start/keysign_entry.sh &&\
