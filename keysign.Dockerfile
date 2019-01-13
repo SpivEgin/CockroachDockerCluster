@@ -6,7 +6,7 @@ FROM quay.io/spivegin/tlmbasedebian
 RUN mkdir  /opt/server/ /opt/cockroach/ /opt/start/ /opt/tlmcerts /opt/tlmkeysign /opt/dumb_init/ /opt/bin
 
 ADD docker/bash/keysign_entry.sh /opt/start/
-ADD docker/cockroach/cockroach.zip /opt/cockroach/
+ADD https://github.com/MyDockerCollection/cockroach/raw/master/files/cockroach.zip /opt/cockroach/
 ADD bin/tlmcockroachcluster /opt/bin/tlmkeys
 ADD docker/dumb-init/dumb-init_1.2.0_amd64.deb /opt/dumb_init/dumb-init_1.2.0_amd64.deb
 ADD https://raw.githubusercontent.com/adbegon/pub/master/AdfreeZoneSSL.crt /usr/local/share/ca-certificates/
