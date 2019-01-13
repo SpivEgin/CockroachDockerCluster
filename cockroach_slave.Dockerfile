@@ -13,7 +13,7 @@ ADD docker/dumb-init/dumb-init_1.2.0_amd64.deb /opt/dumb_init/dumb-init_1.2.0_am
 ADD https://raw.githubusercontent.com/adbegon/pub/master/AdfreeZoneSSL.crt /usr/local/share/ca-certificates/
 
 RUN update-ca-certificates --verbose &&\
-    cd /opt/cockroach && unzip cockroach_noui.zip && mv cockroach.noui /opt/bin/cockroach &&\
+    cd /opt/cockroach && unzip cockroach.zip && mv cockroach /opt/bin/cockroach &&\
     chmod +x /opt/bin/cockroach &&\
     ln -s /opt/bin/cockroach /bin/cockroach &&\
     chmod +x /opt/bin/tlmkeyc &&\
