@@ -1,8 +1,11 @@
-#!/usr/bin/dumb-init /bin/sh
+#!/usr/bin/dumb-init /bin/bash
 
 
 tlmkeys init --keysign
 sleep 10
-tlmkeys nodecluster &
+
+if [[ ${NODE_CLUSTER} == true ]]; then
+    tlmkeys nodecluster &
+fi
 tlmkeys users &
 tlmkeys keysign
