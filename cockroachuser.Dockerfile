@@ -29,7 +29,10 @@ ENV NATS_ADDRESS=tls://192.168.1.140 \
     NATS_PORT=443\
     ONEPASS=rpbEautysvgez37kmHxi \
     COCKROACH_SKIP_ENABLING_DIAGNOSTIC_REPORTING=true \
-    NODE_CLUSTER=false
+    NODE_CLUSTER=false \
+    COCKROACH_HOST=master:26257 \
+    COCKROACH_UIPWD=EzbHqfAihrw9c7opm4uxCFsdtkyev3agjn \
+    COCKROACH_CERTS_DIR=/opt/tlmcockroach/cockroachCerts    
 
 
 WORKDIR /opt/tlmcockroach
