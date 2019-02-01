@@ -10,5 +10,6 @@ if [[ ${NODE_CLUSTER} == true ]]; then
     chmod +x init.sh && ./init.sh
     sleep 110
 fi
+echo "Going to setup UI user"
 sleep 10
 tlmcrui user
