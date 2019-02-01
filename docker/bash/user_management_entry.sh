@@ -11,3 +11,4 @@ if [[ ${NODE_CLUSTER} == true ]]; then
     sleep 110
 fi
 sleep 10
+tlmcrui user

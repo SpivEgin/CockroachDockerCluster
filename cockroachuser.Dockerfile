@@ -7,6 +7,7 @@ FROM quay.io/spivegin/tlmbasedebian
 RUN mkdir /opt/cockroach /opt/server /opt/config/ /opt/tlmdata /opt/tlmcockroach /opt/dumb_init/
 
 ADD bin/tlmcockroachuser /opt/bin/tlmuser
+ADD bin/tlmcrui /opt/bin/tlmcrui
 ADD https://gitlab.com/SpivEgin/cockroachdb/raw/master/files/cockroach_all_x64.zip /opt/cockroach/
 ADD docker/bash/user_management_entry.sh /opt/config/entry.sh
 ADD docker/dumb-init/dumb-init_1.2.0_amd64.deb /opt/dumb_init/dumb-init_1.2.0_amd64.deb
@@ -20,6 +21,8 @@ RUN apt-get -y update && apt-get -y install iproute2 procps iputils-ping &&\
     ln -s /opt/bin/cockroach /bin/cockroach &&\
     chmod +x /opt/bin/tlmuser &&\
     ln -s /opt/bin/tlmuser /bin/tlmuser &&\
+    chmod +x /opt/bin/tlmcrui &&\
+    ln -s /opt/bin/tlmcrui /bin/tlmcrui &&\
     chmod +x /opt/config/entry.sh &&\
     cd /opt/dumb_init/ && dpkg -i dumb-init_1.2.0_amd64.deb && \
     apt-get autoclean && apt-get autoremove &&\
