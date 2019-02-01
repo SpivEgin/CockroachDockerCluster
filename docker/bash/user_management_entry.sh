@@ -11,4 +11,3 @@ if [[ ${NODE_CLUSTER} == true ]]; then
     sleep 110
 fi
 sleep 10
-cockroach sql --execute="CREATE USER spivegin WITH PASSWORD ${COCKROACH_UIPWD};" 
